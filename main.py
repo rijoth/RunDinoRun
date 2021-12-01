@@ -1,3 +1,10 @@
+"""
+Game: Run Dino Run
+Author: Rijo Thomas
+Email: evolvedantgames@gmail.com
+Made with PyGame
+"""
+
 import pygame, sys, shelve
 from random import randint, choice
 from data import moving_background, obstacles, sprite_sheet, player
