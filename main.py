@@ -1,5 +1,4 @@
-import pygame
-import sys
+import pygame, sys, shelve
 from random import randint, choice
 from data import moving_background, obstacles, sprite_sheet, player
 
@@ -36,7 +35,12 @@ start_time = 0
 
 # Score
 score = 0
-high_score = 0
+try:
+    with shelve.open("highscore.dat") as file:
+        high_score = int(file['highscore'])
+        file.close()
+except:
+    high_score = 0
 
 # score
 def display_score():
@@ -165,6 +169,9 @@ while True:
 
         if score > high_score:
             high_score = score
+            file = shelve.open("highscore.dat")
+            file['highscore'] = high_score
+            file.close()
         high_score_text = game_font.render(f'High Score: {high_score}', False, (181,74,74))
         high_score_text_rect = high_score_text.get_rect(center=(160, 100))
         window.blit(title_text, title_text_rect)
